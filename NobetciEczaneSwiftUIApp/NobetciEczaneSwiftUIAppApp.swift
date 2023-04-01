@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 @main
 struct NobetciEczaneSwiftUIAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreen()
         }
     }
 }
