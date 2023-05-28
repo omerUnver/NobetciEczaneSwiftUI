@@ -10,7 +10,6 @@ import CoreLocation
 import SwiftUI
 struct PharmacyModel : Codable {
     let data : [pharmacy]
-    
     private enum CodingKeys : String, CodingKey {
         case data
     }
@@ -29,6 +28,7 @@ struct pharmacy : Codable{
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
 
     }
+    let distanceKm : Double
     
     private enum CodingKeys : String, CodingKey {
                 case eczaneAdi = "EczaneAdi"
@@ -36,7 +36,7 @@ struct pharmacy : Codable{
                 case semt = "Semt"
                 case telefon = "Telefon"
                 case sehir = "Sehir"
-                case ilce, latitude, longitude
+                case ilce, latitude, longitude, distanceKm
         
                 
     }

@@ -14,8 +14,8 @@ struct ozelGorselView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .clipShape(Circle())
-            .overlay(Circle().stroke(Color.white, lineWidth: 5))
-            .shadow(radius: 10)
+            .overlay(Circle().stroke(Color.white, lineWidth: 3))
+            .shadow(radius: 5)
     }
 }
 

@@ -22,7 +22,15 @@ class PharmacyListViewModel : NSObject, ObservableObject{
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
+    public func setupLocation2(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
     
 }
 extension PharmacyListViewModel : CLLocationManagerDelegate {
@@ -38,12 +46,13 @@ extension PharmacyListViewModel : CLLocationManagerDelegate {
                 if let pharmacyArray = pharmacyArray {
                     DispatchQueue.main.async {
                         self.pharmacys = pharmacyArray.map(PharmacyViewModel.init)
-                        
+                        self.locationManager.stopUpdatingLocation()
                     }
                 }
             }
         }
     }
+   
 }
 
 struct PharmacyViewModel {
@@ -75,6 +84,9 @@ struct PharmacyViewModel {
     }
     var coordinateLocation : CLLocationCoordinate2D {
         pharmacy.coordinateLocation
+    }
+    var distanceKm : Double {
+        pharmacy.distanceKm
     }
     
     

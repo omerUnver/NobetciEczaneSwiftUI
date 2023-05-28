@@ -47,12 +47,22 @@ struct mapView: UIViewRepresentable {
 }
 class Coordinator: NSObject, MKMapViewDelegate {
        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-           guard let annotation = view.annotation else {
-               return
+           DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+               guard let annotation = view.annotation else {
+                   return
+               }
+               if view.annotation is MKUserLocation {
+                   mapView.deselectAnnotation(view.annotation, animated: true)
+               } else {
+                   let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate))
+                   mapItem.name = annotation.title ?? "Selected Location"
+                   mapItem.openInMaps()
+               }
+               
+               
+               
            }
-           let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate))
-           mapItem.name = annotation.title ?? "Selected Location"
-           mapItem.openInMaps()
+           
        }
    }
 
